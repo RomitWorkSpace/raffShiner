@@ -9,10 +9,10 @@ class UserAuth
  {
     public function handle(Request $request, Closure $next)
     {
-        if(!session()->has('LoggedUser') && $request->path()!='/login'){
-          return redirect('/login')->with('fail','You must be logged in');
+        if(!session()->has('LoggedUser') && $request->path()!='/user-login'){
+          return redirect('/user-login')->with('fail','You must be logged in');
         }
-        if(session()->has('LoggedUser') && $request->path()=='/login'){
+        if(session()->has('LoggedUser') && $request->path()=='/user-login'){
           return back();
         }
         $response=$next($request);
