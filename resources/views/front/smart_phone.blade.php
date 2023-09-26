@@ -1,7 +1,21 @@
 @extends('layout.front')
 
 @section('content')
-
+<style>
+.phone-structure{
+   height:250px;
+   width:100%;
+   background-size:contain;
+   background-position:center;
+   background-repeat:no-repeat;
+}
+.fa-circle-check{
+   color:green;
+   font-size:35px;
+   float:right;
+   margin-top:14px;
+}
+</style>
 <section class="detail-area">
     <div class="container">
         <p>Home / Sell Phone / <span style="color:#000;">Smart Phone</span></p>
@@ -11,6 +25,7 @@
          <div class="col-md-7">
             <form action="/phone/price" method="post" id="myform" onsubmit="return validateForm()">
                @csrf
+                <input type="hidden" name="username" value="{{session('LoggedUser')}}">
                 <h2 class="mb-4 mt-3">Select Your Phone Brand</h2>
                 <div class="mb-5">
                 <label for="realme">
@@ -64,7 +79,27 @@
                       <label for="no" class="txt">NO</label>
                       <input type="radio" id="no" name="repaired" value="NO">
                    </div>
-                   
+                </div>
+                <div class="row align-items-center mb-5">
+                  <div class="col-md-6 col-7">
+                   <h4>Select quantity:</h4>
+                  </div>
+                  <div class="col-md-4 col-5">
+                   <select class="form-control" name="qty">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                   </select>
+                  </div>
+                  <div class="col-md-2"></div>
+                </div>
+                <div class="phone-structure" style="background-image:url('/img/raff_img/phone-structure.jpg');">
+                <div id="s-top1" style="height:25%;" onclick="screenEnquire()"></div>
+                <div id="s-top2" style="height:25%;" onclick="displayEnquire()"></div>
+                <div id="circuit" style="height:25%;" onclick="circuitEnquire()"></div>
+                <div id="backcover" style="height:25%;" onclick="coverEnquire()"></div>
                 </div>
          </div>
          <div class="col-md-5">
@@ -109,7 +144,42 @@
                      }
                         
                    }
-				
+
+                   function screenEnquire() {
+                      var top1 = document.getElementById("s-top1");
+                      if (top1.innerHTML == "") {
+                        top1.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+                      } else {
+                        top1.innerHTML = "";
+                      }
+                   }
+
+                   function displayEnquire() {
+                     var top2 = document.getElementById("s-top2");
+                      if (top2.innerHTML == "") {
+                        top2.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+                      } else {
+                        top2.innerHTML = "";
+                      }
+                   }
+
+                   function circuitEnquire() {
+                     var circuit = document.getElementById("circuit");
+                      if (circuit.innerHTML == "") {
+                        circuit.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+                      } else {
+                        circuit.innerHTML = "";
+                      }
+                   }
+
+                   function coverEnquire() {
+                     var cover = document.getElementById("backcover");
+                      if (cover.innerHTML == "") {
+                        cover.innerHTML = '<i class="fa-regular fa-circle-check"></i>';
+                      } else {
+                        cover.innerHTML = "";
+                      }
+                   }			
 			</script>        
 
 @endsection
