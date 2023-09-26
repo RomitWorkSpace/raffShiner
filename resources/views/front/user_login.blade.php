@@ -53,25 +53,32 @@ border-bottom-right-radius: .3rem;
                   <h1 style="color:#1886a8;">Raff Shiner.</h1>
                   <h4 class="mt-1 mb-5 pb-1">Contribute to Making The Earth Shiner</h4>
                 </div>
-
-                <form>
+                  @if(session('fail'))
+                  <div class="mb-4">
+                     <span class="alert alert-danger">{{session('fail')}}</span>
+                  </div>
+                  @endif
+                <form action="/user-login/submit" method="post">
+                  @csrf
                   <p>Please login to your account</p>
 
                   <div class="form-outline mb-4">
-                    <input type="email" id="form2Example11" class="form-control"
-                      placeholder="Phone number or email address" />
+                    <input type="text" id="form2Example11" class="form-control" name="username"
+                      placeholder="Enter username" />
                     <label class="form-label" for="form2Example11">Username</label>
+                    @error('username')<span class="text-danger">{{$message}}</span>@enderror
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="form2Example22" class="form-control" />
+                    <input type="password" id="form2Example22" class="form-control" name="password" />
                     <label class="form-label" for="form2Example22">Password</label>
+                    @error('password')<span class="text-danger">{{$message}}</span>@enderror
                   </div>
 
                   <div class="text-center pt-1 mb-5 pb-1">
-                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Log
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
                       in</button>
-                    <a class="text-muted" href="#!">Forgot password?</a>
+                    <a class="text-muted" href="#">Forgot password?</a>
                   </div>
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
